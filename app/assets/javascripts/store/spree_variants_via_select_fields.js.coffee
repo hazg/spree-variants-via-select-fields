@@ -1,21 +1,21 @@
 class OptionHandler
 
-  variant_selects_products:[]
+  variant_selects_products: []
 
   constructor:(variant_selects_products) ->
     @variant_selects_products = variant_selects_products
 
-  valid:->
+  valid: ->
     @variant_selects_products.length > 0
 
-  setToFirstVariant:->
+  setToFirstVariant: ->
     $('.option_values').each (index, element) =>
       $(element).val(@variant_selects_products[0][index + 1])
 
     this.enableDisableOptions $('.option_values').first(), @variant_selects_products[0][1]
 
 
-  enableDisableOptions:(select, option) ->
+  enableDisableOptions: (select, option) ->
     position = undefined
     $('.option_values').each (index) ->
       if select.attr('name') == $(this).attr('name')
