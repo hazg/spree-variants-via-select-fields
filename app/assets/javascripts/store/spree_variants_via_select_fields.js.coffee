@@ -21,7 +21,7 @@ class OptionHandler
       if select.attr('name') == $(this).attr('name')
         position = index + 1
 
-    console.log @variant_selects_products
+    # console.log @variant_selects_products
     $('.option_values').each (index, element) =>
       current_select = $(element)
       if select.attr('name') != current_select.attr('name')
@@ -55,15 +55,16 @@ class OptionHandler
 
 
 jQuery ->
-  option_handler = new OptionHandler(variants)
+  if variants?
+    option_handler = new OptionHandler(variants)
 
-  if !option_handler.valid
-    alert "OptionHandler not initialised"
+    #if !option_handler.valid
+    #  console.log "OptionHandler not initialised"
 
-  option_handler.setToFirstVariant()
+    option_handler.setToFirstVariant()
 
-  option_val = undefined
-  $('.option_values').change ->
-    option_val = $("#" + $(this).attr('id') + " option:selected").val()
-    option_handler.enableDisableOptions $(this), option_val
+    option_val = undefined
+    $('.option_values').change ->
+      option_val = $("#" + $(this).attr('id') + " option:selected").val()
+      option_handler.enableDisableOptions $(this), option_val
 
