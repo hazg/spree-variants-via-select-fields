@@ -20,23 +20,34 @@ class OptionHandler
     $('.option_values').each (index) ->
       if select.attr('name') == $(this).attr('name')
         position = index + 1
-
+    
+    
+      
     # console.log @variant_selects_products
     $('.option_values').each (index, element) =>
       current_select = $(element)
+      
+      styled_items = false
+      
+      # spree_fancy: EasyDropDown
+      if $.fn.easyDropDown? and current_select.parent().is('span.old')
+        styled_items =current_select.parents('.dropdown').find('> div:last-child > ul > li')
+
       if select.attr('name') != current_select.attr('name')
         current_select.children().each (i, element) =>
+          $(styled_items[i]).attr('disabled', 'disabled') if styled_items?
           $(element).attr('disabled', 'disabled')
           for variant in @variant_selects_products
             if (variant[index + 1].toString() == $(element).val() && variant[position].toString() == option.toString())
               $(element).removeAttr('disabled')
+              $(styled_items[i]).removeAttr('disabled') if styled_items?
 
 
       if ($("#" + current_select.attr('id') + " option:selected").attr('disabled') == 'disabled')
         current_select.children().each ->
           if $(this).attr('disabled') == undefined
             current_select.val $(this).val()
-
+      
 
     # finding the actual variant ID and setting the hidden field for the order process
     current_variant = new Array
