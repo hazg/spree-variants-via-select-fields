@@ -3,15 +3,17 @@
     <h6 class='product-section-title'><%= Spree.t(:variants) %></h6>
     <div class='variants-buttons'>
       <% @product.option_types.sort_by { |ot| ot.position }.each do |option_type| %>
-        <div class='option-type-presentation'><%= label_tag option_type.presentation %></div>
-        <div class='option-type-select'>
-          <select id="select_<%= option_type.name.downcase %>" class="option_values" name="option_values[<%= option_type.name.downcase %>]">
-            <% option_type.option_values.each do |option| %>
-              <option value="<%= option.id %>">
-                <%= option.presentation %>
-              </option>
-            <% end %>
-          </select>
+        <div class='option-type-row'>
+          <div class='option-type-presentation'><%= label_tag option_type.presentation %></div>
+          <div class='option-type-select'>
+            <select id="select_<%= option_type.name.downcase %>" class="option_values" name="option_values[<%= option_type.name.downcase %>]">
+              <% option_type.option_values.each do |option| %>
+                <option value="<%= option.id %>">
+                  <%= option.presentation %>
+                </option>
+              <% end %>
+            </select>
+          </div>
         </div>
       <% end %>
     </div>
