@@ -119,4 +119,3 @@ jQuery ->
       $('li.active[disabled=disabled]').each ->
         if dropdown = $(this).parents('.dropdown').find('select')
           dropdown.easyDropDown('destroy').easyDropDown()
-      console.log $('li.active[disabled=disabled]')
