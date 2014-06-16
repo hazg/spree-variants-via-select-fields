@@ -45,9 +45,10 @@
   <% @product.variants.active.each_with_index do |v,index|
      next if v.option_values.empty? || (!v.in_stock? && !Spree::Config[:show_zero_stock_products])
      %>
-    variants[<%= index %>] = [<%= v.id %>, <%= v.option_values.sort{|ov1, ov2| ov1.option_type.position <=> ov2.option_type.position}.map(&:id).join(",") %> ];
+   variants[<%= index %>] = [<%= v.id %>, <%= v.option_values.sort_by { |ot| ot.position }.map(&:id).join(",") %> ];
+   
   <% end %>
-
+  <!--sort{|ov1, ov2| ov1.option_type.position <=> ov2.option_type.position}-->
 </script>
 
     
